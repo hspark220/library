@@ -8,6 +8,9 @@ function Book(title, author) {
 Book.prototype.getTitle = function() {
     return this.title;
 }
+Book.prototype.getAuthor = function() {
+    return this.author;
+}
 
 function addBookToLibrary() {
     clearScreen();
@@ -48,6 +51,7 @@ const clearScreen = () => {
     });
 }
 
+//showing inputs to add books
 const showInputs = () => {
     inputField = document.createElement('fieldset');
     titleLabel = document.createElement('label');
@@ -84,8 +88,6 @@ library.classList.add('library');
 body.append(library, addBookBtn);
 
 
-
-
-
+//Events
 addBookBtn.addEventListener('click', addBookToLibrary);
 
