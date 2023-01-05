@@ -16,6 +16,8 @@ function addBookToLibrary() {
     const tempAuthor = document.getElementById('input-author');
     const tempBook = new Book(tempTitle.value, tempAuthor.value);
     myLibrary.push(tempBook);
+    tempTitle.value = '';
+    tempAuthor.value = '';
     
     printLibrary();
 }
