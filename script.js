@@ -12,26 +12,16 @@ Book.prototype.getTitle = function() {
 function addBookToLibrary() {
     clearScreen();
 
+    showInputs();
     const tempTitle = document.getElementById('input-title');
     const tempAuthor = document.getElementById('input-author');
     const tempBook = new Book(tempTitle.value, tempAuthor.value);
     myLibrary.push(tempBook);
     tempTitle.value = '';
     tempAuthor.value = '';
-    
+
     printLibrary();
 }
-
-// temporary manual books
-const book1 = new Book('book1', 'jasper');
-const book2 = new Book('book2', 'jasper');
-myLibrary.push(book1, book2);
-console.log(myLibrary);
-
-//Query selectors and elements
-const library = document.querySelector('.library');
-const addBookBtn = document.getElementById('addBook');
-const inputTitle = document.getElementById('input-title');
 
 //printing the library
 const printLibrary = () => {
@@ -50,12 +40,51 @@ const printLibrary = () => {
     }
 }
 
+//clear screen
 const clearScreen = () => {
     const oldBooks = document.querySelectorAll('.book');
     oldBooks.forEach(oldBook => {
         oldBook.remove();
     });
 }
+
+const showInputs = () => {
+    inputField = document.createElement('fieldset');
+    titleLabel = document.createElement('label');
+    inputTitle = document.createElement('input');
+    authorLabel = document.createElement('label');
+    inputAuthor = document.createElement('input');
+
+    titleLabel.append('Title')
+    titleLabel.setAttribute('for','input-title')
+    authorLabel.append('Author')
+    authorLabel.setAttribute('for','input-author')
+
+    inputTitle.setAttribute('type', 'text');
+    inputTitle.setAttribute('id', 'input-title');
+
+    inputAuthor.setAttribute('type', 'text');
+    inputAuthor.setAttribute('id', 'input-author');
+
+
+    body.appendChild(inputField);
+    inputField.append(titleLabel, inputTitle, authorLabel, inputAuthor);
+
+}
+
+
+//Query selectors and elements
+const body = document.querySelector('body');
+const library = document.createElement('div');
+const addBookBtn = document.createElement('input');
+addBookBtn.setAttribute('type', 'button');
+addBookBtn.setAttribute('id', 'addBook');
+
+library.classList.add('library');
+body.append(library, addBookBtn);
+
+
+
 
 
 addBookBtn.addEventListener('click', addBookToLibrary);
