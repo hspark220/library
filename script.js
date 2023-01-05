@@ -13,16 +13,45 @@ Book.prototype.getAuthor = function() {
 }
 
 function addBookToLibrary() {
-    clearScreen();
+    
+    const inputField = document.createElement('fieldset');
+    const titleLabel = document.createElement('label');
+    const inputTitle = document.createElement('input');
+    const authorLabel = document.createElement('label');
+    const inputAuthor = document.createElement('input');
+    const submitBookBtn = document.createElement('input');
 
-    showInputs();
+
+    titleLabel.append('Title')
+    titleLabel.setAttribute('for','input-title')
+    authorLabel.append('Author')
+    authorLabel.setAttribute('for','input-author')
+
+    inputTitle.setAttribute('type', 'text');
+    inputTitle.setAttribute('id', 'input-title');
+
+    inputAuthor.setAttribute('type', 'text');
+    inputAuthor.setAttribute('id', 'input-author');
+
+    submitBookBtn.setAttribute('type', 'button');
+    submitBookBtn.setAttribute('id', 'submit-book');
+    submitBookBtn.addEventListener('click', submitBook);
+
+
+    body.appendChild(inputField);
+    inputField.append(titleLabel, inputTitle, authorLabel, inputAuthor, submitBookBtn);
+
+    
+}
+
+const submitBook = () => {
+    clearScreen();
     const tempTitle = document.getElementById('input-title');
     const tempAuthor = document.getElementById('input-author');
     const tempBook = new Book(tempTitle.value, tempAuthor.value);
     myLibrary.push(tempBook);
     tempTitle.value = '';
     tempAuthor.value = '';
-
     printLibrary();
 }
 
@@ -51,31 +80,6 @@ const clearScreen = () => {
     });
 }
 
-//showing inputs to add books
-const showInputs = () => {
-    inputField = document.createElement('fieldset');
-    titleLabel = document.createElement('label');
-    inputTitle = document.createElement('input');
-    authorLabel = document.createElement('label');
-    inputAuthor = document.createElement('input');
-
-    titleLabel.append('Title')
-    titleLabel.setAttribute('for','input-title')
-    authorLabel.append('Author')
-    authorLabel.setAttribute('for','input-author')
-
-    inputTitle.setAttribute('type', 'text');
-    inputTitle.setAttribute('id', 'input-title');
-
-    inputAuthor.setAttribute('type', 'text');
-    inputAuthor.setAttribute('id', 'input-author');
-
-
-    body.appendChild(inputField);
-    inputField.append(titleLabel, inputTitle, authorLabel, inputAuthor);
-
-}
-
 
 //Query selectors and elements
 const body = document.querySelector('body');
@@ -90,4 +94,5 @@ body.append(library, addBookBtn);
 
 //Events
 addBookBtn.addEventListener('click', addBookToLibrary);
+
 
