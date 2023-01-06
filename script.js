@@ -12,6 +12,7 @@ const authorLabel = document.createElement('label');
 const inputAuthor = document.createElement('input');
 const submitBookBtn = document.createElement('input');
 const addBookBtn = document.createElement('input');
+const editBookBtn = document.createElement('input');
 
 //appending selectors
 titleLabel.append('Title')
@@ -34,6 +35,9 @@ submitBookBtn.setAttribute('value','submit');
 addBookBtn.setAttribute('type', 'button');
 addBookBtn.setAttribute('id', 'add-book');
 addBookBtn.setAttribute('value', 'add book');
+editBookBtn.setAttribute('type', 'button');
+editBookBtn.setAttribute('id', 'edit-book');
+editBookBtn.setAttribute('value','edit');
 
 library.classList.add('library');
 
@@ -68,10 +72,28 @@ const submitBook = () => {
     myLibrary.push(tempBook);
     tempTitle.value = '';
     tempAuthor.value = '';
+    console.log(myLibrary);
     clearScreen();
     printLibrary();
-    inputField.remove();
+    removeInputs();
+    
 
+}
+
+const deleteBook = (e) => {
+    e.target.parentNode.remove();
+}
+
+const editBook = (e) => {
+    body.appendChild(inputField);
+    inputField.append(titleDiv, authorDiv, editBookBtn);
+    titleDiv.append(titleLabel, inputTitle);
+    authorDiv.append(authorLabel, inputAuthor);
+}
+
+const submitEdit = (e) => {
+    console.log(e.target.getAttribute('type'));
+    
 }
 
 
@@ -81,10 +103,21 @@ const printLibrary = () => {
         const book = document.createElement('div');
         const bookTitle = document.createElement('p');
         const bookAuthor = document.createElement('p');
+        const deleteBookBtn = document.createElement('input');
+        const editBookBtn = document.createElement('input');
+
+        book.setAttribute('id',i);
+        deleteBookBtn.setAttribute('type','button')
+        deleteBookBtn.setAttribute('id','delete-book');
+        editBookBtn.setAttribute('type','button')
+        editBookBtn.setAttribute('id','edit-book');
+
+        deleteBookBtn.addEventListener('click', deleteBook);
+        editBookBtn.addEventListener('click', editBook);
     
         book.classList.add('book');
     
-        book.append(bookTitle, bookAuthor);
+        book.append(bookTitle, bookAuthor, deleteBookBtn, editBookBtn);
         library.appendChild(book);
     
         bookTitle.textContent =  `${myLibrary[i].title}`;
@@ -100,9 +133,15 @@ const clearScreen = () => {
     });
 }
 
+const removeInputs = () => {
+    inputField.removeChild(submitBookBtn);
+    inputField.remove();
+}
+
 
 //Events
 addBookBtn.addEventListener('click', addBookToLibrary);
 submitBookBtn.addEventListener('click', submitBook);
+editBookBtn.addEventListener('click', submitEdit);
 
 
