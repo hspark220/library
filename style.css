@@ -1,20 +1,38 @@
 .library, .book {
     box-sizing: border-box;
-    border: solid;
+    border: 1px solid;
 }
 
 .library {
-    width: 500px;
-    height: 500px;
+    width: 502px;
+    height: 502px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    
 }
 
 .book {
     width: 100px;
     height: 100px;
-    margin: 10px;
+    margin: 0;
 }
 
 .book p {
     padding: 0;
     margin: 0;
+}
+
+.add-book-fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    top: 251px;
+    left: 251px;
+    transform: translate(-50%, -50%);
+
+    
+
 }
