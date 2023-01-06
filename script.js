@@ -1,5 +1,36 @@
 let myLibrary = [];
 
+//initializing elements and selectors
+const body = document.querySelector('body');
+const library = document.createElement('div');
+const inputField = document.createElement('fieldset');
+const titleLabel = document.createElement('label');
+const inputTitle = document.createElement('input');
+const authorLabel = document.createElement('label');
+const inputAuthor = document.createElement('input');
+const submitBookBtn = document.createElement('input');
+const addBookBtn = document.createElement('input');
+
+//appending selectors
+titleLabel.append('Title')
+authorLabel.append('Author')
+body.append(library, addBookBtn);
+
+//setting attributes
+titleLabel.setAttribute('for','input-title')
+authorLabel.setAttribute('for','input-author')
+inputTitle.setAttribute('type', 'text');
+inputTitle.setAttribute('id', 'input-title');
+inputAuthor.setAttribute('type', 'text');
+inputAuthor.setAttribute('id', 'input-author');
+submitBookBtn.setAttribute('type', 'button');
+submitBookBtn.setAttribute('id', 'submit-book');
+addBookBtn.setAttribute('type', 'button');
+addBookBtn.setAttribute('id', 'addBook');
+
+library.classList.add('library');
+
+
 function Book(title, author) {
     this.title = title
     this.author = author
@@ -13,35 +44,8 @@ Book.prototype.getAuthor = function() {
 }
 
 function addBookToLibrary() {
-    
-    const inputField = document.createElement('fieldset');
-    const titleLabel = document.createElement('label');
-    const inputTitle = document.createElement('input');
-    const authorLabel = document.createElement('label');
-    const inputAuthor = document.createElement('input');
-    const submitBookBtn = document.createElement('input');
-
-
-    titleLabel.append('Title')
-    titleLabel.setAttribute('for','input-title')
-    authorLabel.append('Author')
-    authorLabel.setAttribute('for','input-author')
-
-    inputTitle.setAttribute('type', 'text');
-    inputTitle.setAttribute('id', 'input-title');
-
-    inputAuthor.setAttribute('type', 'text');
-    inputAuthor.setAttribute('id', 'input-author');
-
-    submitBookBtn.setAttribute('type', 'button');
-    submitBookBtn.setAttribute('id', 'submit-book');
-    submitBookBtn.addEventListener('click', submitBook);
-
-
     body.appendChild(inputField);
     inputField.append(titleLabel, inputTitle, authorLabel, inputAuthor, submitBookBtn);
-
-    
 }
 
 const submitBook = () => {
@@ -53,7 +57,10 @@ const submitBook = () => {
     tempTitle.value = '';
     tempAuthor.value = '';
     printLibrary();
+    removeSubmitForm();
+
 }
+
 
 //printing the library
 const printLibrary = () => {
@@ -80,19 +87,14 @@ const clearScreen = () => {
     });
 }
 
-
-//Query selectors and elements
-const body = document.querySelector('body');
-const library = document.createElement('div');
-const addBookBtn = document.createElement('input');
-addBookBtn.setAttribute('type', 'button');
-addBookBtn.setAttribute('id', 'addBook');
-
-library.classList.add('library');
-body.append(library, addBookBtn);
-
+const removeSubmitForm = () => {
+    inputField.removeChild(titleLabel, inputTitle, authorLabel, inputAuthor);
+    titleLabel.remove();
+    inputField.remove();
+}
 
 //Events
 addBookBtn.addEventListener('click', addBookToLibrary);
+submitBookBtn.addEventListener('click', submitBook);
 
 
