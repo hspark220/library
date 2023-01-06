@@ -49,13 +49,17 @@ function addBookToLibrary() {
 }
 
 const submitBook = () => {
-    clearScreen();
+    
     const tempTitle = document.getElementById('input-title');
     const tempAuthor = document.getElementById('input-author');
+    if(tempTitle.value == '') {return}; 
+    if(tempAuthor.value == '') { tempAuthor.value = 'anonymous'};
+
     const tempBook = new Book(tempTitle.value, tempAuthor.value);
     myLibrary.push(tempBook);
     tempTitle.value = '';
     tempAuthor.value = '';
+    clearScreen();
     printLibrary();
     removeSubmitForm();
 
