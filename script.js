@@ -30,8 +30,10 @@ inputAuthor.setAttribute('type', 'text');
 inputAuthor.setAttribute('id', 'input-author');
 submitBookBtn.setAttribute('type', 'button');
 submitBookBtn.setAttribute('id', 'submit-book');
+submitBookBtn.setAttribute('value','submit');
 addBookBtn.setAttribute('type', 'button');
-addBookBtn.setAttribute('id', 'addBook');
+addBookBtn.setAttribute('id', 'add-book');
+addBookBtn.setAttribute('value', 'add book');
 
 library.classList.add('library');
 

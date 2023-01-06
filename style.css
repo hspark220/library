@@ -32,7 +32,13 @@
     top: 251px;
     left: 251px;
     transform: translate(-50%, -50%);
+}
 
+#add-book {
+    width: 75px;
+    height: 25px;
+}
+
+#submit-book {
     
-
 }
