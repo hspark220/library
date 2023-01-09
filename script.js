@@ -1,5 +1,6 @@
 let myLibrary = [];
 let id = null;
+let mouseDown = false;
 
 //initializing elements and selectors
 const body = document.querySelector('body');
@@ -26,6 +27,7 @@ authorDiv.setAttribute('class','author-div');
 titleLabel.setAttribute('for','input-title');
 authorLabel.setAttribute('for','input-author');
 inputField.setAttribute('class','add-book-fieldset');
+inputField.setAttribute('id','input-field');
 inputTitle.setAttribute('type', 'text');
 inputTitle.setAttribute('id', 'input-title');
 inputAuthor.setAttribute('type', 'text');
@@ -46,21 +48,9 @@ library.classList.add('library');
 function Book(title, author) {
     this.title = title
     this.author = author
-    // this.getTitle = function() {
-    //     return this.title;
-    // }
-    // this.setTitle = function(title) {
-    //     this.title = title;
-    // }
-    // this.getAuthor = function() {
-    //     return this.author;
-    // }
-    // this.setAuthor = function(author) {
-    //     this.author = author;
-    // }
 }
 
-
+//shows the input box for adding books
 function addBookToLibrary() {
     body.appendChild(inputField);
     inputField.append(titleDiv, authorDiv, submitBookBtn);
@@ -68,8 +58,8 @@ function addBookToLibrary() {
     authorDiv.append(authorLabel, inputAuthor);
 }
 
+//actually submits the info and changes the screen?
 const submitBook = () => {
-    
     const tempTitle = document.getElementById('input-title');
     const tempAuthor = document.getElementById('input-author');
     if(tempTitle.value == '') {return}; 
@@ -93,6 +83,7 @@ const deleteBook = (e) => {
     e.target.parentNode.remove();
 }
 
+//pops up the edit box to edit the information
 const editBook = (e) => {
     id = e.target.parentNode.getAttribute('id');
     inputTitle.value = myLibrary[id].title;
@@ -104,6 +95,7 @@ const editBook = (e) => {
 
 }
 
+//submits the actual edit
 const submitEdit = (e) => {
     myLibrary[id].title = inputTitle.value;
     myLibrary[id].author = inputAuthor.value;
@@ -114,7 +106,6 @@ const submitEdit = (e) => {
 
     tempTitle.value = '';
     tempAuthor.value = '';
-    
 }
 
 
@@ -154,15 +145,30 @@ const clearScreen = () => {
     });
 }
 
+//removing input from screen
 const removeInputs = () => {
     inputField.removeChild(inputField.lastChild);
     inputField.remove();
 }
 
+const closeInputField = (e) => {
+    console.log('close');
+}
+
+const mouseDownToggle = () => {
+
+}
 
 //Events
 addBookBtn.addEventListener('click', addBookToLibrary);
 submitBookBtn.addEventListener('click', submitBook);
 editBookBtn.addEventListener('click', submitEdit);
+body.click(function (e) {
+    if (e.target.id = 'input-field') {
+        return;
+    } else {
+        console.log('out');
+    }
+})
 
 
