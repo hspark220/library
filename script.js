@@ -1,4 +1,5 @@
 let myLibrary = [];
+let id = null;
 
 //initializing elements and selectors
 const body = document.querySelector('body');
@@ -45,14 +46,20 @@ library.classList.add('library');
 function Book(title, author) {
     this.title = title
     this.author = author
+    // this.getTitle = function() {
+    //     return this.title;
+    // }
+    // this.setTitle = function(title) {
+    //     this.title = title;
+    // }
+    // this.getAuthor = function() {
+    //     return this.author;
+    // }
+    // this.setAuthor = function(author) {
+    //     this.author = author;
+    // }
 }
 
-Book.prototype.getTitle = function() {
-    return this.title;
-}
-Book.prototype.getAuthor = function() {
-    return this.author;
-}
 
 function addBookToLibrary() {
     body.appendChild(inputField);
@@ -80,21 +87,33 @@ const submitBook = () => {
 }
 
 const deleteBook = (e) => {
-    const id = e.target.parentNode.getAttribute('id');
+    id = e.target.parentNode.getAttribute('id');
+    console.log(id);
     myLibrary.splice(id,1);
     e.target.parentNode.remove();
-    console.log(myLibrary);
 }
 
 const editBook = (e) => {
+    id = e.target.parentNode.getAttribute('id');
+    inputTitle.value = myLibrary[id].title;
+    inputAuthor.value = myLibrary[id].author;
     body.appendChild(inputField);
     inputField.append(titleDiv, authorDiv, editBookBtn);
     titleDiv.append(titleLabel, inputTitle);
     authorDiv.append(authorLabel, inputAuthor);
+
 }
 
 const submitEdit = (e) => {
-    console.log(e.target.getAttribute('type'));
+    myLibrary[id].title = inputTitle.value;
+    myLibrary[id].author = inputAuthor.value;
+
+    clearScreen();
+    printLibrary();
+    removeInputs();
+
+    tempTitle.value = '';
+    tempAuthor.value = '';
     
 }
 
@@ -136,7 +155,7 @@ const clearScreen = () => {
 }
 
 const removeInputs = () => {
-    inputField.removeChild(submitBookBtn);
+    inputField.removeChild(inputField.lastChild);
     inputField.remove();
 }
 
