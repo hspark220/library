@@ -72,7 +72,6 @@ const submitBook = () => {
     myLibrary.push(tempBook);
     tempTitle.value = '';
     tempAuthor.value = '';
-    console.log(myLibrary);
     clearScreen();
     printLibrary();
     removeInputs();
@@ -81,7 +80,10 @@ const submitBook = () => {
 }
 
 const deleteBook = (e) => {
+    const id = e.target.parentNode.getAttribute('id');
+    myLibrary.splice(id,1);
     e.target.parentNode.remove();
+    console.log(myLibrary);
 }
 
 const editBook = (e) => {
