@@ -29,13 +29,12 @@
     padding: 2px;
 
     display: grid;
-    grid-template: 20px 1fr 1fr 20px / 60px 18px 16px;
+    grid-template: 20px 1fr 20px / 60px 18px 16px;
     grid-template-areas:
     "empty1 empty1 delete"
     "title title title"
     "author author author"
-    "read read read"
-    "empty2 edit edit";
+    "read edit edit";
 }
 .book p {
     padding: 0;
@@ -47,6 +46,9 @@
 }
 .book-author {
     grid-area: author;
+}
+#book-read-check {
+    grid-area: read;
 }
 
 #delete-book {

@@ -101,8 +101,9 @@ const editBook = (e) => {
     id = e.target.parentNode.getAttribute('id');
     inputTitle.value = myLibrary[id].title;
     inputAuthor.value = myLibrary[id].author;
+    readCheck.checked = myLibrary[id].read;
     body.appendChild(inputField);
-    inputField.append(titleDiv, authorDiv, editBookBtn, closeBtn);
+    inputField.append(titleDiv, authorDiv, readDiv, editBookBtn, closeBtn);
     titleDiv.append(titleLabel, inputTitle);
     authorDiv.append(authorLabel, inputAuthor);
 
@@ -112,12 +113,19 @@ const editBook = (e) => {
 const submitEdit = (e) => {
     myLibrary[id].title = inputTitle.value;
     myLibrary[id].author = inputAuthor.value;
-
+    myLibrary[id].read = readCheck.checked;
     clearScreen();
     printLibrary();
     removeInputs();    
 }
 
+const checkBook = (e) => {
+    id = e.target.parentNode.getAttribute('id');
+    myLibrary[id].read = !myLibrary[id].read
+    console.log(myLibrary[id].read)
+
+    //add styling difference
+}
 
 //printing the library
 const printLibrary = () => {
@@ -128,8 +136,6 @@ const printLibrary = () => {
         const deleteBookBtn = document.createElement('input');
         const editBookBtn = document.createElement('input');
         
-        const bookReadDiv = document.createElement('div');
-        const bookReadLabel = document.createElement('label');
         const bookReadCheck = document.createElement('input');
 
         book.setAttribute('id',i);
@@ -142,12 +148,10 @@ const printLibrary = () => {
         editBookBtn.setAttribute('id','edit-book');
         editBookBtn.setAttribute('value','edit');
 
-        bookReadDiv.setAttribute('class','book-read-check');
-        bookReadLabel.setAttribute('for','book-read-check')
-        bookReadCheck.setAttribute('type', 'checkbox');
+        bookReadCheck.setAttribute('type', 'button');
         bookReadCheck.setAttribute('id','book-read-check');
 
-        if (myLibrary[i].read == true) { bookReadCheck.setAttribute('checked', myLibrary[i].read); }
+        
         
         console.log(myLibrary[i].read);
         console.log(bookReadCheck.getAttribute('checked'));
@@ -155,13 +159,12 @@ const printLibrary = () => {
 
         deleteBookBtn.addEventListener('click', deleteBook);
         editBookBtn.addEventListener('click', editBook);
+        bookReadCheck.addEventListener('click',checkBook);
     
         book.classList.add('book');
     
         
-        book.append(bookTitle, bookAuthor, bookReadDiv, deleteBookBtn, editBookBtn);
-        bookReadLabel.append('Read:');
-        bookReadDiv.append(bookReadLabel, bookReadCheck);
+        book.append(bookTitle, bookAuthor, bookReadCheck, deleteBookBtn, editBookBtn);
         library.appendChild(book);
     
         bookTitle.textContent =  `${myLibrary[i].title}`;
@@ -181,9 +184,12 @@ const clearScreen = () => {
 const removeInputs = () => {
     inputTitle.value = '';
     inputAuthor.value = '';
+    readCheck.checked = false;
     inputField.removeChild(inputField.lastChild);
     inputField.remove();
 }
+
+
 
 //Events
 addBookBtn.addEventListener('click', addBookToLibrary);
