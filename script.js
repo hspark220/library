@@ -15,6 +15,7 @@ const inputAuthor = document.createElement('input');
 const submitBookBtn = document.createElement('input');
 const addBookBtn = document.createElement('input');
 const editBookBtn = document.createElement('input');
+const closeBtn = document.createElement('input');
 
 //appending selectors
 titleLabel.append('Title')
@@ -41,6 +42,9 @@ addBookBtn.setAttribute('value', 'add book');
 editBookBtn.setAttribute('type', 'button');
 editBookBtn.setAttribute('id', 'edit-book');
 editBookBtn.setAttribute('value','edit');
+closeBtn.setAttribute('type','button');
+closeBtn.setAttribute('id','close');
+closeBtn.setAttribute('value','x');
 
 library.classList.add('library');
 
@@ -53,7 +57,7 @@ function Book(title, author) {
 //shows the input box for adding books
 function addBookToLibrary() {
     body.appendChild(inputField);
-    inputField.append(titleDiv, authorDiv, submitBookBtn);
+    inputField.append(titleDiv, authorDiv, submitBookBtn, closeBtn);
     titleDiv.append(titleLabel, inputTitle);
     authorDiv.append(authorLabel, inputAuthor);
 }
@@ -89,7 +93,7 @@ const editBook = (e) => {
     inputTitle.value = myLibrary[id].title;
     inputAuthor.value = myLibrary[id].author;
     body.appendChild(inputField);
-    inputField.append(titleDiv, authorDiv, editBookBtn);
+    inputField.append(titleDiv, authorDiv, editBookBtn, closeBtn);
     titleDiv.append(titleLabel, inputTitle);
     authorDiv.append(authorLabel, inputAuthor);
 
@@ -104,8 +108,8 @@ const submitEdit = (e) => {
     printLibrary();
     removeInputs();
 
-    tempTitle.value = '';
-    tempAuthor.value = '';
+    inputTitle.value = '';
+    inputAuthor.value = '';
 }
 
 
@@ -155,20 +159,9 @@ const closeInputField = (e) => {
     console.log('close');
 }
 
-const mouseDownToggle = () => {
-
-}
-
 //Events
 addBookBtn.addEventListener('click', addBookToLibrary);
 submitBookBtn.addEventListener('click', submitBook);
 editBookBtn.addEventListener('click', submitEdit);
-body.click(function (e) {
-    if (e.target.id = 'input-field') {
-        return;
-    } else {
-        console.log('out');
-    }
-})
-
+closeBtn.addEventListener('click',removeInputs);
 

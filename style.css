@@ -25,9 +25,14 @@
 }
 
 .add-book-fieldset {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template: 40px repeat(2, 30px) 40px / 50px 200px 30px 30px;
+    grid-template-areas:
+    "empty1 empty1 empty1 close"
+    "title title title title"
+    "author author author author"
+    "empty2 empty2 submit submit";
+
     position: fixed;
     top: 251px;
     left: 251px;
@@ -39,6 +44,33 @@
     height: 25px;
 }
 
-#submit-book {
-    
+.title-div{
+    grid-area: title;
+
+    display: flex;
+}
+.author-div {
+    grid-area: author;
+
+    display: flex;
+}
+.title-div label, .author-div label {
+    width: 50px;
+    align-self: center;
+} 
+#input-title, #input-author{
+    width: 75%;
+    height: 1rem;
+    align-self: center;
+
+}
+
+
+#close {
+    grid-area: close;
+    align-self: start;
+}
+#submit-book, #edit-book {
+    grid-area: submit;   
+    align-self: end;
 }
