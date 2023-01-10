@@ -1,3 +1,10 @@
+/* Font Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,900&display=swap');
+
+* {
+    font-family: Roboto, san-serif;
+}
+
 .library, .book {
     box-sizing: border-box;
     border: 1px solid;
@@ -13,24 +20,55 @@
     
 }
 
+/* Book Styling */
 .book {
+    box-sizing: border-box;
     width: 100px;
     height: 100px;
     margin: 0;
-}
+    padding: 2px;
 
+    display: grid;
+    grid-template: 20px 1fr 1fr 20px / 60px 18px 16px;
+    grid-template-areas:
+    "empty1 empty1 delete"
+    "title title title"
+    "author author author"
+    "read read read"
+    "empty2 edit edit";
+}
 .book p {
     padding: 0;
     margin: 0;
+    font-size: 0.8rem;
+}
+.book-title {
+    grid-area: title;
+}
+.book-author {
+    grid-area: author;
 }
 
+#delete-book {
+    grid-area: delete;
+    display: flex;
+    place-content: center;
+}
+#edit-book {
+    grid-area: edit;
+    display: flex;
+    place-content: center;
+}
+
+/* Input Field Set Styling */
 .add-book-fieldset {
     display: grid;
-    grid-template: 40px repeat(2, 30px) 40px / 50px 200px 30px 30px;
+    grid-template: 40px repeat(3, 30px) 40px / 50px 200px 30px 30px;
     grid-template-areas:
     "empty1 empty1 empty1 close"
     "title title title title"
     "author author author author"
+    "read read read read"
     "empty2 empty2 submit submit";
 
     position: fixed;
@@ -48,18 +86,25 @@
     grid-area: title;
 
     display: flex;
+    gap: 10px;
 }
 .author-div {
     grid-area: author;
 
     display: flex;
+    gap: 10px;
 }
-.title-div label, .author-div label {
+.read-div {
+    grid-area: read;
+    display: flex;
+    gap: 10px;
+}
+.title-div label, .author-div label, .read-div label {
     width: 50px;
     align-self: center;
 } 
 #input-title, #input-author{
-    width: 75%;
+    width: 200px;
     height: 1rem;
     align-self: center;
 
@@ -70,7 +115,7 @@
     grid-area: close;
     align-self: start;
 }
-#submit-book, #edit-book {
+#submit-book, #edit-submit {
     grid-area: submit;   
     align-self: end;
 }

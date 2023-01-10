@@ -17,9 +17,15 @@ const addBookBtn = document.createElement('input');
 const editBookBtn = document.createElement('input');
 const closeBtn = document.createElement('input');
 
+const readDiv = document.createElement('div');
+const readLabel = document.createElement('label');
+const readCheck = document.createElement('input');
+
+
 //appending selectors
-titleLabel.append('Title')
-authorLabel.append('Author')
+titleLabel.append('Title:');
+authorLabel.append('Author:');
+readLabel.append('Read:')
 body.append(library, addBookBtn);
 
 //setting attributes
@@ -40,39 +46,43 @@ addBookBtn.setAttribute('type', 'button');
 addBookBtn.setAttribute('id', 'add-book');
 addBookBtn.setAttribute('value', 'add book');
 editBookBtn.setAttribute('type', 'button');
-editBookBtn.setAttribute('id', 'edit-book');
+editBookBtn.setAttribute('id', 'edit-submit');
 editBookBtn.setAttribute('value','edit');
 closeBtn.setAttribute('type','button');
 closeBtn.setAttribute('id','close');
 closeBtn.setAttribute('value','x');
 
+readDiv.setAttribute('class','read-div');
+readLabel.setAttribute('for','read-check');
+readLabel.setAttribute('value','Read');
+readCheck.setAttribute('id','read-check');
+readCheck.setAttribute('type','checkbox');
+
 library.classList.add('library');
 
 
-function Book(title, author) {
+function Book(title, author, read) {
     this.title = title
     this.author = author
+    this.read = read
 }
 
 //shows the input box for adding books
 function addBookToLibrary() {
     body.appendChild(inputField);
-    inputField.append(titleDiv, authorDiv, submitBookBtn, closeBtn);
+    inputField.append(titleDiv, authorDiv, readDiv, submitBookBtn, closeBtn);
     titleDiv.append(titleLabel, inputTitle);
     authorDiv.append(authorLabel, inputAuthor);
+    readDiv.append(readLabel, readCheck);
 }
 
 //actually submits the info and changes the screen?
 const submitBook = () => {
-    const tempTitle = document.getElementById('input-title');
-    const tempAuthor = document.getElementById('input-author');
-    if(tempTitle.value == '') {return}; 
-    if(tempAuthor.value == '') { tempAuthor.value = 'anonymous'};
+    if(inputTitle.value == '') {return}; 
+    if(inputAuthor.value == '') { inputAuthor.value = 'anonymous'};
 
-    const tempBook = new Book(tempTitle.value, tempAuthor.value);
+    const tempBook = new Book(inputTitle.value, inputAuthor.value, readCheck.checked);
     myLibrary.push(tempBook);
-    tempTitle.value = '';
-    tempAuthor.value = '';
     clearScreen();
     printLibrary();
     removeInputs();
@@ -82,7 +92,6 @@ const submitBook = () => {
 
 const deleteBook = (e) => {
     id = e.target.parentNode.getAttribute('id');
-    console.log(id);
     myLibrary.splice(id,1);
     e.target.parentNode.remove();
 }
@@ -106,10 +115,7 @@ const submitEdit = (e) => {
 
     clearScreen();
     printLibrary();
-    removeInputs();
-
-    inputTitle.value = '';
-    inputAuthor.value = '';
+    removeInputs();    
 }
 
 
@@ -121,19 +127,41 @@ const printLibrary = () => {
         const bookAuthor = document.createElement('p');
         const deleteBookBtn = document.createElement('input');
         const editBookBtn = document.createElement('input');
+        
+        const bookReadDiv = document.createElement('div');
+        const bookReadLabel = document.createElement('label');
+        const bookReadCheck = document.createElement('input');
 
         book.setAttribute('id',i);
+        bookTitle.setAttribute('class','book-title');
+        bookAuthor.setAttribute('class','book-author');
         deleteBookBtn.setAttribute('type','button')
         deleteBookBtn.setAttribute('id','delete-book');
+        deleteBookBtn.setAttribute('value','x');
         editBookBtn.setAttribute('type','button')
         editBookBtn.setAttribute('id','edit-book');
+        editBookBtn.setAttribute('value','edit');
+
+        bookReadDiv.setAttribute('class','book-read-check');
+        bookReadLabel.setAttribute('for','book-read-check')
+        bookReadCheck.setAttribute('type', 'checkbox');
+        bookReadCheck.setAttribute('id','book-read-check');
+
+        if (myLibrary[i].read == true) { bookReadCheck.setAttribute('checked', myLibrary[i].read); }
+        
+        console.log(myLibrary[i].read);
+        console.log(bookReadCheck.getAttribute('checked'));
+        
 
         deleteBookBtn.addEventListener('click', deleteBook);
         editBookBtn.addEventListener('click', editBook);
     
         book.classList.add('book');
     
-        book.append(bookTitle, bookAuthor, deleteBookBtn, editBookBtn);
+        
+        book.append(bookTitle, bookAuthor, bookReadDiv, deleteBookBtn, editBookBtn);
+        bookReadLabel.append('Read:');
+        bookReadDiv.append(bookReadLabel, bookReadCheck);
         library.appendChild(book);
     
         bookTitle.textContent =  `${myLibrary[i].title}`;
@@ -151,12 +179,10 @@ const clearScreen = () => {
 
 //removing input from screen
 const removeInputs = () => {
+    inputTitle.value = '';
+    inputAuthor.value = '';
     inputField.removeChild(inputField.lastChild);
     inputField.remove();
-}
-
-const closeInputField = (e) => {
-    console.log('close');
 }
 
 //Events
