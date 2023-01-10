@@ -11,8 +11,8 @@
 }
 
 .library {
-    width: 502px;
-    height: 502px;
+    width: 602px;
+    height: 602px;
 
     display: flex;
     flex-wrap: wrap;
@@ -23,13 +23,13 @@
 /* Book Styling */
 .book {
     box-sizing: border-box;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     margin: 0;
     padding: 2px;
 
     display: grid;
-    grid-template: 20px 1fr 20px / 60px 18px 16px;
+    grid-template: 20px 1fr 1fr 20px / 1fr 18px 16px;
     grid-template-areas:
     "empty1 empty1 delete"
     "title title title"
@@ -37,7 +37,7 @@
     "read edit edit";
 }
 .book p {
-    padding: 0;
+    padding: 0 5px;
     margin: 0;
     font-size: 0.8rem;
 }

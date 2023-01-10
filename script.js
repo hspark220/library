@@ -70,10 +70,11 @@ function Book(title, author, read) {
 //shows the input box for adding books
 function addBookToLibrary() {
     body.appendChild(inputField);
-    inputField.append(titleDiv, authorDiv, readDiv, submitBookBtn, closeBtn);
+    inputField.append(titleDiv, authorDiv, readDiv, closeBtn, submitBookBtn);
     titleDiv.append(titleLabel, inputTitle);
     authorDiv.append(authorLabel, inputAuthor);
     readDiv.append(readLabel, readCheck);
+    inputTitle.focus();
 }
 
 //actually submits the info and changes the screen?
@@ -86,8 +87,19 @@ const submitBook = () => {
     clearScreen();
     printLibrary();
     removeInputs();
-    
-
+}
+const submitBookEnter = (e) => {
+    const buttonID = e.target.parentNode.parentNode.lastChild.getAttribute('id');
+    if (e.key=== "Enter") {
+        if(buttonID === 'submit-book') {
+            e.preventDefault();
+            submitBook();
+        } else {
+            e.preventDefault();
+            submitEdit();
+        }
+        
+    }
 }
 
 const deleteBook = (e) => {
@@ -106,8 +118,10 @@ const editBook = (e) => {
     inputField.append(titleDiv, authorDiv, readDiv, editBookBtn, closeBtn);
     titleDiv.append(titleLabel, inputTitle);
     authorDiv.append(authorLabel, inputAuthor);
-
+    inputTitle.focus();
 }
+
+
 
 //submits the actual edit
 const submitEdit = (e) => {
@@ -167,8 +181,8 @@ const printLibrary = () => {
         book.append(bookTitle, bookAuthor, bookReadCheck, deleteBookBtn, editBookBtn);
         library.appendChild(book);
     
-        bookTitle.textContent =  `${myLibrary[i].title}`;
-        bookAuthor.textContent = `${myLibrary[i].author}`; 
+        bookTitle.textContent =  `"${myLibrary[i].title}"`;
+        bookAuthor.textContent = `-${myLibrary[i].author}`; 
     }
 }
 
@@ -196,4 +210,5 @@ addBookBtn.addEventListener('click', addBookToLibrary);
 submitBookBtn.addEventListener('click', submitBook);
 editBookBtn.addEventListener('click', submitEdit);
 closeBtn.addEventListener('click',removeInputs);
-
+inputAuthor.addEventListener('keypress', submitBookEnter);
+inputTitle.addEventListener('keypress', submitBookEnter);
