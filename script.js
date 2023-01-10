@@ -26,7 +26,7 @@ const readCheck = document.createElement('input');
 titleLabel.append('Title:');
 authorLabel.append('Author:');
 readLabel.append('Read:')
-body.append(library, addBookBtn);
+body.append(addBookBtn, library);
 
 //setting attributes
 titleDiv.setAttribute('class','title-div');
