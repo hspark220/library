@@ -6,10 +6,13 @@
 }
 
 :root {
-    --library-color: white;
-    --book-color: white;
-    --input-field-color: white;
+    --library-color: #eae7dc;
+    --book-color: #D8C3A5;
+    --input-field-color: #8E8D8A;
+    --letter-color-light: #f9fafb;
 }
+
+
 
 .library, .book {
     box-sizing: border-box;
@@ -70,6 +73,7 @@
     grid-area: edit;
     display: flex;
     place-content: center;
+    
 }
 
 /* Input Field Set Styling */
@@ -89,6 +93,7 @@
     transform: translate(-50%, -50%);
 
     background-color: var(--input-field-color); /*300*/
+    color: var(--letter-color-light);
 }
 
 #add-book {
@@ -128,8 +133,13 @@
 #close {
     grid-area: close;
     align-self: start;
+
+
 }
 #submit-book, #edit-submit {
     grid-area: submit;   
     align-self: end;
+
+
+    
 }
