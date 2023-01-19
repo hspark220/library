@@ -4,7 +4,8 @@ let mouseDown = false;
 
 //initializing elements and selectors
 const body = document.querySelector('body');
-const library = document.createElement('div');
+const library = document.querySelector('.library');
+const addBookBtn = document.getElementById('add-book');
 const inputField = document.createElement('fieldset');
 const titleDiv = document.createElement('div');
 const titleLabel = document.createElement('label');
@@ -13,7 +14,6 @@ const authorDiv = document.createElement('div');
 const authorLabel = document.createElement('label');
 const inputAuthor = document.createElement('input');
 const submitBookBtn = document.createElement('input');
-const addBookBtn = document.createElement('input');
 const editBookBtn = document.createElement('input');
 const closeBtn = document.createElement('input');
 
@@ -26,7 +26,6 @@ const readCheck = document.createElement('input');
 titleLabel.append('Title:');
 authorLabel.append('Author:');
 readLabel.append('Read:')
-body.append(addBookBtn, library);
 
 //setting attributes
 titleDiv.setAttribute('class','title-div');
@@ -42,9 +41,6 @@ inputAuthor.setAttribute('id', 'input-author');
 submitBookBtn.setAttribute('type', 'button');
 submitBookBtn.setAttribute('id', 'submit-book');
 submitBookBtn.setAttribute('value','submit');
-addBookBtn.setAttribute('type', 'button');
-addBookBtn.setAttribute('id', 'add-book');
-addBookBtn.setAttribute('value', 'add book');
 editBookBtn.setAttribute('type', 'button');
 editBookBtn.setAttribute('id', 'edit-submit');
 editBookBtn.setAttribute('value','edit');
@@ -58,7 +54,7 @@ readLabel.setAttribute('value','Read');
 readCheck.setAttribute('id','read-check');
 readCheck.setAttribute('type','checkbox');
 
-library.classList.add('library');
+
 
 
 function Book(title, author, read) {
