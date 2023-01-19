@@ -136,7 +136,6 @@ const submitEdit = (e) => {
 const checkBook = (e) => {
     id = e.target.parentNode.getAttribute('id');
     myLibrary[id].read = !myLibrary[id].read
-    console.log(myLibrary[id].read)
 
     //add styling difference
 }
@@ -165,10 +164,6 @@ const printLibrary = () => {
         bookReadCheck.setAttribute('type', 'button');
         bookReadCheck.setAttribute('id','book-read-check');
 
-        
-        
-        console.log(myLibrary[i].read);
-        console.log(bookReadCheck.getAttribute('checked'));
         
 
         deleteBookBtn.addEventListener('click', deleteBook);

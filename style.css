@@ -5,6 +5,12 @@
     font-family: Roboto, san-serif;
 }
 
+:root {
+    --library-color: white;
+    --book-color: white;
+    --input-field-color: white;
+}
+
 .library, .book {
     box-sizing: border-box;
     border: 1px solid;
@@ -17,6 +23,8 @@
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+
+    background-color: var(--library-color);
     
 }
 
@@ -35,6 +43,8 @@
     "title title title"
     "author author author"
     "read edit edit";
+
+    background-color: var(--book-color);
 }
 .book p {
     padding: 0 5px;
@@ -74,9 +84,11 @@
     "empty2 empty2 submit submit";
 
     position: fixed;
-    top: 251px;
-    left: 251px;
+    top: 301px;
+    left: 301px;
     transform: translate(-50%, -50%);
+
+    background-color: var(--input-field-color); /*300*/
 }
 
 #add-book {
