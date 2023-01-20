@@ -1,6 +1,5 @@
 let myLibrary = [];
 let id = null;
-let mouseDown = false;
 
 //initializing elements and selectors
 const body = document.querySelector('body');
