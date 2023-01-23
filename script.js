@@ -123,6 +123,7 @@ const submitEdit = (e) => {
     myLibrary[id].title = inputTitle.value;
     myLibrary[id].author = inputAuthor.value;
     myLibrary[id].read = readCheck.checked;
+    
     clearScreen();
     printLibrary();
     removeInputs();    
@@ -130,7 +131,9 @@ const submitEdit = (e) => {
 
 const checkBook = (e) => {
     id = e.target.parentNode.getAttribute('id');
-    myLibrary[id].read = !myLibrary[id].read
+    myLibrary[id].read = !myLibrary[id].read;
+    console.log(myLibrary[id].read);
+    e.target.value = myLibrary[id].read === true ? 'read' : 'not read';
 
     //add styling difference
 }
@@ -173,6 +176,7 @@ const printLibrary = () => {
     
         bookTitle.textContent =  `"${myLibrary[i].title}"`;
         bookAuthor.textContent = `-${myLibrary[i].author}`; 
+        bookReadCheck.value = myLibrary[i].read === true ? 'read' : 'not read';
     }
 }
 
